@@ -3,6 +3,7 @@ import math
 
 bootstrap_value = 1000
 sample_value = 1000
+top_nth = 10
 
 def person(i):
     index = i
@@ -56,33 +57,33 @@ def bootstraping(iteration):
         people_skillLuck = []
         people_onlySkill = []
 
-        for j in range(10):
+        for j in range(top_nth):
             total_skill += all_sorted_people[len(all_sorted_people) - j - 1][0]
             total_luck += all_sorted_people[len(all_sorted_people) - j - 1][1]
 
             people_skillLuck.append(all_sorted_people[len(all_sorted_people) - j - 1][3])
             people_onlySkill.append(all_sorted_people_onSkill[len(all_sorted_people_onSkill) - j - 1][3])
 
-        average_skill = total_skill / 10
-        average_luck = total_luck / 10
+        average_skill = total_skill / top_nth
+        average_luck = total_luck / top_nth
 
         # print(total_skill, total_luck)
         # print(average_skill, average_luck)
         # print(people_skillLuck, people_onlySkill)
 
         # Make an array that reports the chance that a person is chosen only because they had the skills)
-        diff_chosen_people.append(len((set(people_skillLuck) & set(people_onlySkill))) / 10)
+        diff_chosen_people.append(len((set(people_skillLuck) & set(people_onlySkill))) / top_nth)
 
         # Calculating deviation
         sum_pow_deviation_skill = 0
         sum_pow_deviation_luck = 0
 
-        for k in range(10):
+        for k in range(top_nth):
             sum_pow_deviation_skill += pow(abs(average_skill - all_sorted_people[len(all_sorted_people) - k - 1][0]), 2)
             sum_pow_deviation_luck += pow(abs(average_luck - all_sorted_people[len(all_sorted_people) - k - 1][1]), 2)
 
-        sd_skill = math.sqrt(sum_pow_deviation_skill / 9)
-        sd_luck = math.sqrt(sum_pow_deviation_luck / 9)
+        sd_skill = math.sqrt(sum_pow_deviation_skill / (top_nth - 1))
+        sd_luck = math.sqrt(sum_pow_deviation_luck / (top_nth - 1))
 
         # add all results (skill and luck) into an array
         result.append([average_skill, sd_skill, average_luck, sd_luck])
