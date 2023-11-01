@@ -24,15 +24,9 @@ diff_chosen_people = []
 def bootstraping(iteration):
     # Reports the progression
     print("Calculating values")
-    for bootstrap_value in range(iteration):
-        if (bootstrap_value == round(iteration / 4)):
-            print("25% done")
-        elif (bootstrap_value == round(iteration / 2)):
-            print("50% done")
-        elif (bootstrap_value == round(iteration * 3 / 4)):
-            print("75% done")
-        elif (bootstrap_value == iteration):
-            print("100% done")
+    for bv in range(iteration):
+        if bv % (bootstrap_value * 0.1) == 0:
+            print(str(round(bv / (bootstrap_value / 10)) * 10) + "%")
 
         # Sort the "all_people" array to find the 10 best people
         all_people = []
@@ -42,8 +36,9 @@ def bootstraping(iteration):
         for i in range(sample_value):
             new_person = person(i)
             all_people.append(new_person)
-            all_sorted_people = sorted(all_people, key=lambda x: x[2])
-            all_sorted_people_onSkill = sorted(all_people, key=lambda x: x[0])
+        
+        all_sorted_people = sorted(all_people, key=lambda x: x[2])
+        all_sorted_people_onSkill = sorted(all_people, key=lambda x: x[0])
 
         # print(all_people)
         # print(all_sorted_people)
