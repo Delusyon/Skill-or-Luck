@@ -2,8 +2,8 @@ import random
 import math
 
 bootstrap_value = 1000
-sample_value = 1000
-top_nth = 10
+sample_value = 18300
+top_nth = 11
 
 def person(i):
     index = i
